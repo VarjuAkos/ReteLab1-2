@@ -36,7 +36,7 @@ public class TrainSensorTest {
 
     @Test
 	public void settingSpeedLimitBelowFiftyPercentReferenceSpeed_AlarmsUser() {
-
+        
 	}
 
     @Test
