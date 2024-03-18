@@ -13,15 +13,17 @@ import static org.mockito.Mockito.*;
 
 public class TrainSensorTest {
 	TrainSensor sensor;
+    TrainController mockController;
+    TrainUser mockUser;
 	
 	@Before
 	public void before() {
-        TrainController mockController = mock(TrainController.class);
-        TrainUser mockUser = mock(TrainUser.class);
+        mockController = mock(TrainController.class);
+        mockUser = mock(TrainUser.class);
 		sensor = new TrainSensorImpl(mockController, mockUser);
-        mockController.setSpeedLimit(10);
-        mockUser.overrideJoystickPosition(10);
-        mockController.followSpeed();
+
+        when(mockController.getReferenceSpeed()).thenReturn(10);
+        sensor.overrideSpeedLimit(10);
 	}
 	
 	@Test
@@ -36,12 +38,14 @@ public class TrainSensorTest {
 
     @Test
 	public void settingSpeedLimitBelowFiftyPercentReferenceSpeed_AlarmsUser() {
-        
+        sensor.overrideSpeedLimit(4);
+        verify(mockUser, times(1)).setAlarmState(true);
 	}
 
     @Test
 	public void settingSpeedLimitInCorrectRange_DoesntAlarmUser() {
-
+        sensor.overrideSpeedLimit(12);
+        verify(mockUser, times(0)).setAlarmState(true);
 	}
 
 }
