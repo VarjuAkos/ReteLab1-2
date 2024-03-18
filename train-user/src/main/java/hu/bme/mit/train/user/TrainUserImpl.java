@@ -37,7 +37,7 @@ public class TrainUserImpl implements TrainUser {
 			return this.alarmState;
 	}
 
-	void setAlarmState(boolean alarmState) {
+	public void setAlarmState(boolean alarmState) {
 		this.alarmState = alarmState;
 	}
 
