@@ -28,12 +28,15 @@ public class TrainSensorTest {
 	
 	@Test
 	public void settingSpeedLimitBelowZero_AlarmsUser() {
-
+		sensor.overrideSpeedLimit(-10);
+		verify(mockUser,times(1)).setAlarmState(true);
+		
 	}
 
     @Test
 	public void settingSpeedLimitAboveFiveHundred_AlarmsUser() {
-
+		sensor.overrideSpeedLimit(5000);
+		verify(mockUser,times(1)).setAlarmState(true);
 	}
 
     @Test
