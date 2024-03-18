@@ -7,7 +7,7 @@ import hu.bme.mit.train.interfaces.TrainUser;
 import hu.bme.mit.train.sensor.TrainSensorImpl;
 import hu.bme.mit.train.user.TrainUserImpl;
 
-public class TrainSystem {
+public class TrainSystem extends Thread {
 
 	private TrainController controller = new TrainControllerImpl();
 	private TrainUser user = new TrainUserImpl(controller);
@@ -24,5 +24,7 @@ public class TrainSystem {
 	public TrainUser getUser() {
 		return user;
 	}
+
+
 
 }
