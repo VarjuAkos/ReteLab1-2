@@ -52,7 +52,7 @@ public class TrainControllerImpl extends Thread implements TrainController {
 			while (true) {
 				try {
 					// Call the followSpeed method
-					this.followSpeed();
+					followSpeed();
 					Thread.sleep(100); // Sleep for 100 milliseconds
 				} catch (InterruptedException e) {
 					e.printStackTrace();
