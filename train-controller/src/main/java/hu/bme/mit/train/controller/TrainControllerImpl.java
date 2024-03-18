@@ -8,6 +8,11 @@ public class TrainControllerImpl extends Thread implements TrainController {
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 
+	public TrainControllerImpl() {
+		FollowReferenceSpeedThread thread = new FollowReferenceSpeedThread();
+		thread.start();
+	}
+
 	@Override
 	public void followSpeed() {
 		if (referenceSpeed < 0) {
@@ -41,24 +46,24 @@ public class TrainControllerImpl extends Thread implements TrainController {
 		}
 	}
 
-	@Override
-    public void run() {
-        while (true) {
-            try {
-                // Call the followSpeed method
-                this.followSpeed();
-                Thread.sleep(10); // Sleep for 10 milliseconds
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	class FollowReferenceSpeedThread extends Thread {
+		@Override
+		public void run() {
+			while (true) {
+				try {
+					// Call the followSpeed method
+					this.followSpeed();
+					Thread.sleep(100); // Sleep for 100 milliseconds
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	@Override
 	public void setJoystickPosition(int joystickPosition) {
 		this.step = joystickPosition;
-		TrainControllerImpl thread = new TrainControllerImpl();
-		thread.start();
 	}
 
 	public void emergencyBreak() {
